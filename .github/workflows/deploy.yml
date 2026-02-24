@@ -1,0 +1,22 @@
+name: Shopify-Odoo CI/CD
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Shopify App Docker Image
+        run: docker build -t shopify-app ./shopify-app
+
+      - name: Build Odoo Connector Docker Image
+        run: docker build -t odoo-connector ./odoo-connector
+
+      - name: Push to AWS ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Deploy to ECS / Fargate (optional)
+        run: echo "Deploy command here"  # placeholder
