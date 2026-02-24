@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  shopify-app:
+    build: ./shopify-app
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./shopify-app/.env
+    depends_on:
+      - odoo-connector
+
+  odoo-connector:
+    build: ./odoo-connector
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./odoo-connector/.env
